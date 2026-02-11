@@ -20,7 +20,7 @@ export async function POST(req: Request) {
         - Total Pipeline Value (Ref): $${kpis.totalPipelineValue.toLocaleString()}
 
         - Top Issues & Billing:
-        ${workOrders.filter(w => w.status !== 'Done').slice(0, 5).map(w => `- ${w.name}: ${w.status} (${w.energy_type}) | Bill: ${w.billing_status} | Due: ${w.amount_receivable}`).join('\n')}
+        ${workOrders.filter(w => w.status !== 'Done').slice(0, 5).map(w => `- ${w.name}: ${w.status} (${(w as any).energy_type || (w as any).sector || "N/A"}) | Bill: ${(w as any).billing_status || (w as any).billingStatus || "N/A"} | Due: ${(w as any).amount_receivable || (w as any).amountReceivable || "N/A"}`).join('\n')}
         `;
         } else {
             contextData = `
